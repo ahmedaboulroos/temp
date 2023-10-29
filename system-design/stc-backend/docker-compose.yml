@@ -1,0 +1,19 @@
+services:
+  database:
+    image: postgres:15.3
+    environment:
+      - POSTGRES_DB=stc_backend
+      - POSTGRES_USER=amin
+      - POSTGRES_PASSWORD=amin
+    ports:
+      - 5432:5432
+  backend:
+    build: .
+    environment:
+      - DATABASE_URL=jdbc:postgresql://database:5432/stc_backend
+      - DATABASE_USERNAME=amin
+      - DATABASE_PASSWORD=amin
+    ports:
+      - 8080:8080
+    depends_on:
+      - database
